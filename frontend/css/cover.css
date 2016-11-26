@@ -146,6 +146,11 @@ body {
   .site-wrapper-inner {
     vertical-align: middle;
   }
+  
+  .site-wrapper {
+      background: url("../img/bg-photo.jpg");
+  }
+  
   /* Handle the widths */
   .masthead,
   .mastfoot,

@@ -136,6 +136,17 @@ textarea {
     text-align: center;
 }
 
+.logo {
+    font-weight: 700;
+}
+
+.logo span {
+    font-size: 18px;
+}
+
+.logo-fa {
+    font-size: 17px;
+}
 
 
 
