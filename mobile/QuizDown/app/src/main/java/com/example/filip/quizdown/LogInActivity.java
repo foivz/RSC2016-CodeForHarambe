@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+
 public class LogInActivity extends AppCompatActivity {
 
     private SignInButton mGoogleBtn;
@@ -37,15 +38,19 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-       /* mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
-                    startActivity(new Intent());
+                    Toast.makeText(LogInActivity.this, "akt pokrenut", Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(LogInActivity.this, MenuActivity.class ));
+                }else{
+                    Toast.makeText(LogInActivity.this, "akt nije pokrenut", Toast.LENGTH_SHORT).show();
                 }
             }
-        };*/
+        };
 
         mGoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
 
@@ -72,9 +77,17 @@ public class LogInActivity extends AppCompatActivity {
         }) ;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
     @Override
@@ -95,9 +108,9 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -111,6 +124,13 @@ public class LogInActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LogInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        }else {
+
+                            Toast.makeText(LogInActivity.this, "Login Successful.",
+                                    Toast.LENGTH_SHORT).show();
+
+                            // Enter your code after the Sign In complete
+
                         }
                         // ...
                     }
