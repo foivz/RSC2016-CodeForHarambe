@@ -1,0 +1,75 @@
+﻿@model IEnumerable<rsc_harambe.Models.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rules)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.teamsize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rules)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.teamsize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

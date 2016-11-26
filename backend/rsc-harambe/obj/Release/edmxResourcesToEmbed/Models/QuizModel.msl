@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="QuissEntities">
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="Model.Answer">
+        <MappingFragment StoreEntitySet="Answers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="questionID" ColumnName="questionID" />
+          <ScalarProperty Name="aText" ColumnName="aText" />
+          <ScalarProperty Name="isCorrect" ColumnName="isCorrect" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="Model.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="eDesc" ColumnName="eDesc" />
+          <ScalarProperty Name="eDate" ColumnName="eDate" />
+          <ScalarProperty Name="loc" ColumnName="loc" />
+          <ScalarProperty Name="prize" ColumnName="prize" />
+          <ScalarProperty Name="rules" ColumnName="rules" />
+          <ScalarProperty Name="teamsize" ColumnName="teamsize" />
+          <ScalarProperty Name="eStatus" ColumnName="eStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="Model.Question">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="qType" ColumnName="qType" />
+          <ScalarProperty Name="qText" ColumnName="qText" />
+          <ScalarProperty Name="qTime" ColumnName="qTime" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeamAnswers">
+      <EntityTypeMapping TypeName="Model.TeamAnswer">
+        <MappingFragment StoreEntitySet="TeamAnswers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="answerID" ColumnName="answerID" />
+          <ScalarProperty Name="teamID" ColumnName="teamID" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="points" ColumnName="points" />
+          <ScalarProperty Name="answersText" ColumnName="answersText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="Model.Team">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Model.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="token" ColumnName="token" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserTeams" TypeName="Model.UserTeams" StoreEntitySet="UserTeams">
+      <EndProperty Name="Teams">
+        <ScalarProperty Name="id" ColumnName="teamID" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="id" ColumnName="userID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

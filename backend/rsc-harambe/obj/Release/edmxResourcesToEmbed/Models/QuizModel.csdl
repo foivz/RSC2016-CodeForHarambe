@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="questionID" Type="Int32" Nullable="false" />
+    <Property Name="aText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isCorrect" Type="Int32" />
+    <NavigationProperty Name="TeamAnswers" Relationship="Self.fk_answers_ta" FromRole="Answers" ToRole="TeamAnswers" />
+    <NavigationProperty Name="Question" Relationship="Self.fk_questions_answers" FromRole="Answers" ToRole="Questions" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="eDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="eDate" Type="DateTime" Precision="3" />
+    <Property Name="loc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="prize" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="rules" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="teamsize" Type="Int32" Nullable="false" />
+    <Property Name="eStatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TeamAnswers" Relationship="Self.fk_event_ta" FromRole="Events" ToRole="TeamAnswers" />
+    <NavigationProperty Name="Questions" Relationship="Self.fk_events_questions" FromRole="Events" ToRole="Questions" />
+    <NavigationProperty Name="Teams" Relationship="Self.fk_events_teams" FromRole="Events" ToRole="Teams" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="qType" Type="Int32" Nullable="false" />
+    <Property Name="qText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="qTime" Type="Int32" />
+    <Property Name="eventID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Answers" Relationship="Self.fk_questions_answers" FromRole="Questions" ToRole="Answers" />
+    <NavigationProperty Name="Event" Relationship="Self.fk_events_questions" FromRole="Questions" ToRole="Events" />
+  </EntityType>
+  <EntityType Name="TeamAnswer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="answerID" Type="Int32" Nullable="false" />
+    <Property Name="teamID" Type="Int32" Nullable="false" />
+    <Property Name="eventID" Type="Int32" Nullable="false" />
+    <Property Name="points" Type="Int32" />
+    <Property Name="answersText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Answer" Relationship="Self.fk_answers_ta" FromRole="TeamAnswers" ToRole="Answers" />
+    <NavigationProperty Name="Event" Relationship="Self.fk_event_ta" FromRole="TeamAnswers" ToRole="Events" />
+    <NavigationProperty Name="Team" Relationship="Self.fk_teams_ta" FromRole="TeamAnswers" ToRole="Teams" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="eventID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="Self.fk_events_teams" FromRole="Teams" ToRole="Events" />
+    <NavigationProperty Name="TeamAnswers" Relationship="Self.fk_teams_ta" FromRole="Teams" ToRole="TeamAnswers" />
+    <NavigationProperty Name="Users" Relationship="Self.UserTeams" FromRole="Teams" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="token" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Teams" Relationship="Self.UserTeams" FromRole="Users" ToRole="Teams" />
+  </EntityType>
+  <Association Name="fk_answers_ta">
+    <End Role="Answers" Type="Self.Answer" Multiplicity="1" />
+    <End Role="TeamAnswers" Type="Self.TeamAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Answers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeamAnswers">
+        <PropertyRef Name="answerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_questions_answers">
+    <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+    <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="questionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_event_ta">
+    <End Role="Events" Type="Self.Event" Multiplicity="1" />
+    <End Role="TeamAnswers" Type="Self.TeamAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeamAnswers">
+        <PropertyRef Name="eventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_events_questions">
+    <End Role="Events" Type="Self.Event" Multiplicity="1" />
+    <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="eventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_events_teams">
+    <End Role="Events" Type="Self.Event" Multiplicity="1" />
+    <End Role="Teams" Type="Self.Team" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Teams">
+        <PropertyRef Name="eventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_teams_ta">
+    <End Role="Teams" Type="Self.Team" Multiplicity="1" />
+    <End Role="TeamAnswers" Type="Self.TeamAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeamAnswers">
+        <PropertyRef Name="teamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTeams">
+    <End Role="Teams" Type="Self.Team" Multiplicity="*" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="QuissEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Answers" EntityType="Self.Answer" />
+    <EntitySet Name="Events" EntityType="Self.Event" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="TeamAnswers" EntityType="Self.TeamAnswer" />
+    <EntitySet Name="Teams" EntityType="Self.Team" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="fk_answers_ta" Association="Self.fk_answers_ta">
+      <End Role="Answers" EntitySet="Answers" />
+      <End Role="TeamAnswers" EntitySet="TeamAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_questions_answers" Association="Self.fk_questions_answers">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_event_ta" Association="Self.fk_event_ta">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="TeamAnswers" EntitySet="TeamAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_events_questions" Association="Self.fk_events_questions">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_events_teams" Association="Self.fk_events_teams">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="Teams" EntitySet="Teams" />
+    </AssociationSet>
+    <AssociationSet Name="fk_teams_ta" Association="Self.fk_teams_ta">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="TeamAnswers" EntitySet="TeamAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="UserTeams" Association="Self.UserTeams">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,82 @@
+﻿@model rsc_harambe.Models.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.loc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.loc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rules)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rules)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.teamsize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teamsize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eStatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
