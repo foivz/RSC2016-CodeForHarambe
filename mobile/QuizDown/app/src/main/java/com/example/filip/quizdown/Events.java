@@ -1,12 +1,20 @@
 package com.example.filip.quizdown;
 
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class Events {
+    private static String TAG = Events.class.getSimpleName();
 
     private int id;
     private String name;
     private String description;
-    private String date;
+    private Date date;
     private String location;
     private String prize;
     private String rules;
@@ -16,7 +24,7 @@ public class Events {
     public Events() {
     }
 
-    public Events(int id, String teamSize, String rules, String prize, String location, String date, String description, String name) {
+    public Events(int id, String teamSize, String rules, String prize, String location, Date date, String description, String name) {
         this.id = id;
         this.teamSize = teamSize;
         this.rules = rules;
@@ -59,12 +67,21 @@ public class Events {
         this.prize = prize;
     }
 
-    public String getDate() {
-        return date;
+    public String getDate(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String d = format.format(date);
+        return d;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = new Date();
+        try {
+            d = format.parse(date);
+        }catch (ParseException e){
+            Log.e(TAG, "ParseException: " + e.getMessage());
+        }
+        this.date = d;
     }
 
     public String getName() {
