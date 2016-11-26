@@ -25,7 +25,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
+<<<<<<< HEAD
 
+=======
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:design:24.2.0'
+>>>>>>> cd965fbe49340c32b26f04fcb1dbe9e742c12b97
     testCompile 'junit:junit:4.12'
     compile 'com.google.firebase:firebase-auth:9.0.2'
     compile 'com.google.android.gms:play-services-auth:9.0.2'
