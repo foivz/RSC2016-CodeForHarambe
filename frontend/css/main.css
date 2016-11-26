@@ -118,13 +118,16 @@ textarea {
     font-size: 24px;
     line-height: 1.42;
     border-radius: 75px;
-    background: #5cb85c;
+    background: #337ab7;
     border: 1px solid #ffffff;
+    text-shadow: none;
+    color: #fff;
 }
 
 .btn-circle:hover {
-    background: #5cb85c;
+    background: #337ab7;
     border: 1px solid #333333;
+    color: #fff;
 }
 
 .btn-circle i {
@@ -148,7 +151,37 @@ textarea {
     font-size: 17px;
 }
 
+.question-container {
+    background: #eeeeee;
+    border-top: 2px solid #428bca;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    margin: 0 0 20px 0;
+}
 
+.question-container .answer-input {
+    width: 95%;
+    float: left;
+}
+
+.question-container .answer-checkbox {
+    width: 40px;
+    height: 25px;
+}
+
+.add-question {
+    background: #428bca;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    cursor: pointer;
+}
 
 
 
