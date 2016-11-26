@@ -52,7 +52,7 @@ export class AnswerService {
         const url = this.eventsUrl+'/answers/'+id;
 
         return this.http
-            .delete(url, {headers: this.headers})
+            .post(url, JSON.stringify({action: 'delete', id: id}), {headers: this.headers})
             .toPromise()
             .catch(this.handleError);
     }

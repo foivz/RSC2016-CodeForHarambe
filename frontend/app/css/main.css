@@ -186,7 +186,7 @@ textarea {
 }
 
 .remove-button {
-    margin-right: 20px;
+    margin-right: 10px;
     font-size: 24px;
     cursor: pointer;
     float: left;
@@ -194,6 +194,7 @@ textarea {
 
 .remove-button-right {
     float: right;
+    margin-right: 0;
 }
 
 .items-container .answer-checkbox {

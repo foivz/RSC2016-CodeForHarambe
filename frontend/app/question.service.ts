@@ -49,10 +49,10 @@ export class QuestionService {
     }
 
     remove(id: number): any {
-        const url = this.eventsUrl+'/questions/'+id;
+        const url = this.eventsUrl+'/questions';
 
         return this.http
-            .delete(url, {headers: this.headers})
+            .post(url, JSON.stringify({action: 'delete', id: id}), {headers: this.headers})
             .toPromise()
             .catch(this.handleError);
     }
