@@ -97,11 +97,44 @@ textarea {
 
 .panel {
     float: left;
-    width: 30%;
+    width: 31%;
     margin: 10px 1%;
 }
 
+.add-new {
+    width: 97%;
+    text-align: center;
+}
 
+.edit-form .btn-success {
+    width: 100%;
+}
+
+.btn-circle {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 24px;
+    line-height: 1.42;
+    border-radius: 75px;
+    background: #5cb85c;
+    border: 1px solid #ffffff;
+}
+
+.btn-circle:hover {
+    background: #5cb85c;
+    border: 1px solid #333333;
+}
+
+.btn-circle i {
+    margin-top: 40px;
+}
+
+.event-start h4, span {
+    width: 100%;
+    text-align: center;
+}
 
 
 

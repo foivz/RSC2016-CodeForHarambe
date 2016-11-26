@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/theme.css">
@@ -36,7 +37,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
@@ -64,6 +65,13 @@
 
             <div class="row">
                 <div class="col-sm-12">
+                    <a href="create.html">
+                        <div class="panel panel-primary add-new">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Add +</h3>
+                            </div>
+                        </div>
+                    </a>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">Event title</h3>
@@ -74,7 +82,7 @@
                                 <li role="presentation"><a href="#">Status <span class="badge">Open</span></a></li>
                             </ul>
                             <hr />
-                            <button type="button" class="btn btn-success">Edit</button>
+                            <a href="update.html"><button type="button" class="btn btn-success">Edit</button></a>
                             <button type="button" class="btn btn-warning">Notify</button>
                             <button type="button" class="btn btn-danger">Delete</button>
                         </div>
@@ -89,7 +97,7 @@
                                 <li role="presentation"><a href="#">Status <span class="badge">Open</span></a></li>
                             </ul>
                             <hr />
-                            <button type="button" class="btn btn-success">Edit</button>
+                            <a href="update.html"><button type="button" class="btn btn-success">Edit</button></a>
                             <button type="button" class="btn btn-warning">Notify</button>
                             <button type="button" class="btn btn-danger">Delete</button>
                         </div>
