@@ -62,9 +62,9 @@
   </EntityType>
   <EntityType Name="UserTeams">
     <Key>
-      <PropertyRef Name="userID" />
-      <PropertyRef Name="teamID" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="userID" Type="int" Nullable="false" />
     <Property Name="teamID" Type="int" Nullable="false" />
   </EntityType>
@@ -128,6 +128,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_team_usert">
+    <End Role="Teams" Type="Self.Teams" Multiplicity="1" />
+    <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserTeams">
+        <PropertyRef Name="teamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_teams_ta">
     <End Role="Teams" Type="Self.Teams" Multiplicity="1" />
     <End Role="TeamAnswers" Type="Self.TeamAnswers" Multiplicity="*" />
@@ -140,19 +152,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_teams_ut">
-    <End Role="Teams" Type="Self.Teams" Multiplicity="1" />
-    <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Teams">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="UserTeams">
-        <PropertyRef Name="teamID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_users_ut">
+  <Association Name="fk_user_usert">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="*" />
     <ReferentialConstraint>
@@ -192,15 +192,15 @@
       <End Role="Questions" EntitySet="Questions" />
       <End Role="Answers" EntitySet="Answers" />
     </AssociationSet>
+    <AssociationSet Name="fk_team_usert" Association="Self.fk_team_usert">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="UserTeams" EntitySet="UserTeams" />
+    </AssociationSet>
     <AssociationSet Name="fk_teams_ta" Association="Self.fk_teams_ta">
       <End Role="Teams" EntitySet="Teams" />
       <End Role="TeamAnswers" EntitySet="TeamAnswers" />
     </AssociationSet>
-    <AssociationSet Name="fk_teams_ut" Association="Self.fk_teams_ut">
-      <End Role="Teams" EntitySet="Teams" />
-      <End Role="UserTeams" EntitySet="UserTeams" />
-    </AssociationSet>
-    <AssociationSet Name="fk_users_ut" Association="Self.fk_users_ut">
+    <AssociationSet Name="fk_user_usert" Association="Self.fk_user_usert">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserTeams" EntitySet="UserTeams" />
     </AssociationSet>

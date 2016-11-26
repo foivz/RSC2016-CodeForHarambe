@@ -16,7 +16,7 @@ namespace rsc_harambe.Controllers
 {
     public class QEventsController : ApiController
     {
-        private QuissEntities db = new QuissEntities();
+        private KvizEntities db = new KvizEntities();
         // GET: api/QEvents
         public List<Event> Get()
         {

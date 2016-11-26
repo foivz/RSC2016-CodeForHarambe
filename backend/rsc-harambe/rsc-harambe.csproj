@@ -241,6 +241,7 @@
     <Compile Include="Controllers\TeamAnswersController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserTeamsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,6 +281,9 @@
       <DependentUpon>QuizModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
+      <DependentUpon>QuizModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserTeam.cs">
       <DependentUpon>QuizModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -363,11 +367,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Events1\Create.cshtml" />
-    <Content Include="Views\Events1\Delete.cshtml" />
-    <Content Include="Views\Events1\Details.cshtml" />
-    <Content Include="Views\Events1\Edit.cshtml" />
-    <Content Include="Views\Events1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

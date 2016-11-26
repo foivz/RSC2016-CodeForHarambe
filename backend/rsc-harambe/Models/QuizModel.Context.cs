@@ -13,10 +13,10 @@ namespace rsc_harambe.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QuissEntities : DbContext
+    public partial class KvizEntities : DbContext
     {
-        public QuissEntities()
-            : base("name=QuissEntities")
+        public KvizEntities()
+            : base("name=KvizEntities")
         {
         }
     
@@ -31,5 +31,6 @@ namespace rsc_harambe.Models
         public virtual DbSet<TeamAnswer> TeamAnswers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserTeam> UserTeams { get; set; }
     }
 }

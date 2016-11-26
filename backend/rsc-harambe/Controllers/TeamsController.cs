@@ -16,7 +16,7 @@ namespace rsc_harambe.Controllers
 {
     public class TeamsController : ApiController
     {
-        private QuissEntities db = new QuissEntities();
+        private KvizEntities db = new KvizEntities();
         // GET: api/QTeams
         public List<Team> Get()
         {

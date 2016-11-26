@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="QuissEntities">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="KvizEntities">
     <EntitySetMapping Name="Answers">
       <EntityTypeMapping TypeName="Model.Answer">
         <MappingFragment StoreEntitySet="Answers">
@@ -67,13 +67,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="UserTeams" TypeName="Model.UserTeams" StoreEntitySet="UserTeams">
-      <EndProperty Name="Teams">
-        <ScalarProperty Name="id" ColumnName="teamID" />
-      </EndProperty>
-      <EndProperty Name="Users">
-        <ScalarProperty Name="id" ColumnName="userID" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="UserTeams">
+      <EntityTypeMapping TypeName="Model.UserTeam">
+        <MappingFragment StoreEntitySet="UserTeams">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="teamID" ColumnName="teamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

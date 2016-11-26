@@ -163,4 +163,3 @@ C:\Users\Wolf\Desktop\rsc\RSC2016-CodeForHarambe\backend\rsc-harambe\bin\Microso
 C:\Users\Wolf\Desktop\rsc\RSC2016-CodeForHarambe\backend\rsc-harambe\bin\System.Web.Http.Owin.xml
 C:\Users\Wolf\Desktop\rsc\RSC2016-CodeForHarambe\backend\rsc-harambe\obj\Release\rsc-harambe.dll
 C:\Users\Wolf\Desktop\rsc\RSC2016-CodeForHarambe\backend\rsc-harambe\obj\Release\rsc-harambe.pdb
-C:\Users\Wolf\Desktop\rsc\RSC2016-CodeForHarambe\backend\rsc-harambe\obj\Release\rsc-harambe.csprojResolveAssemblyReference.cache

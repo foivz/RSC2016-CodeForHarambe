@@ -16,7 +16,7 @@ namespace rsc_harambe.Controllers
 {
     public class QuestionsController : ApiController
     {
-        private QuissEntities db = new QuissEntities();
+        private KvizEntities db = new KvizEntities();
         // GET: api/QQuestions
         public List<Question> Get()
         {

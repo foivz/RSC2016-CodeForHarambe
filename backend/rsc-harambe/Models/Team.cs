@@ -9,16 +9,17 @@
 
 namespace rsc_harambe.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Team
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Team()
         {
             this.TeamAnswers = new HashSet<TeamAnswer>();
-            this.Users = new HashSet<User>();
+            this.UserTeams = new HashSet<UserTeam>();
         }
     
         public int id { get; set; }
@@ -27,8 +28,10 @@ namespace rsc_harambe.Models
     
         public virtual Event Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<TeamAnswer> TeamAnswers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<UserTeam> UserTeams { get; set; }
     }
 }

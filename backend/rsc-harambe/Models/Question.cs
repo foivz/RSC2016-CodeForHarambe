@@ -9,9 +9,10 @@
 
 namespace rsc_harambe.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Question
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +28,8 @@ namespace rsc_harambe.Models
         public int eventID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
-        public virtual Event Event { get; set; }
+        [JsonIgnore]
+        public ICollection<Answer> Answers { get; set; }
+        public Event Event { get; set; }
     }
 }
