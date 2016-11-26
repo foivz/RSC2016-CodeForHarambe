@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Web.Http.Cors;
 
 namespace rsc_harambe.Controllers
 {
@@ -58,13 +59,13 @@ namespace rsc_harambe.Controllers
                         Event @event = new Event();
 
                         @event.name = jdata.name;
-                        @event.eDesc = jdata.edesc;
-                        @event.eDate = jdata.edate;
+                        @event.eDesc = jdata.eDesc;
+                        @event.eDate = jdata.eDate;
                         @event.loc = jdata.loc;
                         @event.prize = jdata.prize;
                         @event.rules = jdata.rules;
                         @event.teamsize = jdata.teamsize;
-                        @event.eStatus = jdata.estatus;
+                        @event.eStatus = jdata.eStatus;
 
                         db.Events.Add(@event);
                         db.SaveChanges();
@@ -82,13 +83,13 @@ namespace rsc_harambe.Controllers
 
                     @event.id = jdata.id;
                     @event.name = jdata.name;
-                    @event.eDesc = jdata.edesc;
-                    @event.eDate = jdata.edate;
+                    @event.eDesc = jdata.eDesc;
+                    @event.eDate = jdata.eDate;
                     @event.loc = jdata.loc;
                     @event.prize = jdata.prize;
                     @event.rules = jdata.rules;
                     @event.teamsize = jdata.teamsize;
-                    @event.eStatus = jdata.estatus;
+                    @event.eStatus = jdata.eStatus;
 
                     eventLista.Add(@event);
                     db.Entry(@event).State = EntityState.Modified;

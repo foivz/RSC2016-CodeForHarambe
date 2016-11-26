@@ -11,12 +11,16 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using FireSharp.Interfaces;
+using FireSharp;
+using FireSharp.Config;
 
 namespace rsc_harambe.Controllers
 {
     public class TeamAnswersController : ApiController
     {
         private KvizEntities db = new KvizEntities();
+        private IFirebaseClient _client;
         // GET: api/QTeamAnswers
         public List<TeamAnswer> Get()
         {
@@ -57,15 +61,33 @@ namespace rsc_harambe.Controllers
                     {
                         TeamAnswer @TeamAnswer = new TeamAnswer();
 
-                        @TeamAnswer.answerID = jdata.answerid;
-                        @TeamAnswer.teamID = jdata.teamid;
-                        @TeamAnswer.eventID = jdata.eventid;
+                        @TeamAnswer.answerID = jdata.answerID;
+                        @TeamAnswer.teamID = jdata.teamID;
+                        @TeamAnswer.eventID = jdata.eventID;
                         @TeamAnswer.points = jdata.points;
-                        @TeamAnswer.answersText = jdata.answerstext;
+                        @TeamAnswer.answersText = jdata.answersText;
 
                         db.TeamAnswers.Add(@TeamAnswer);
                         db.SaveChanges();
                         TeamAnswerLista.Add(@TeamAnswer);
+
+                        string path = "room/" + jdata.teamid;
+                        string fName = jdata.teamid;
+                        string fText = JsonConvert.SerializeObject(jdata.answerstext);
+
+                        IFirebaseConfig config = new FirebaseConfig
+                        {
+                            AuthSecret = "fGO6ZIeJcJyOcKohS5jsSuna3SMnaZL7qktSafix",
+                            BasePath = "https://rsc-harambe.firebaseio.com"
+                        };
+
+                        _client = new FirebaseClient(config);
+
+                        await _client.PushAsync(path, new
+                        {
+                            name = fName,
+                            text = fText
+                        });
                     }
                 }
 
@@ -78,11 +100,11 @@ namespace rsc_harambe.Controllers
                     TeamAnswer @TeamAnswer = new TeamAnswer();
 
                     @TeamAnswer.id = jdata.id;
-                    @TeamAnswer.answerID = jdata.answerid;
-                    @TeamAnswer.teamID = jdata.teamid;
-                    @TeamAnswer.eventID = jdata.eventid;
+                    @TeamAnswer.answerID = jdata.answerID;
+                    @TeamAnswer.teamID = jdata.teamID;
+                    @TeamAnswer.eventID = jdata.eventID;
                     @TeamAnswer.points = jdata.points;
-                    @TeamAnswer.answersText = jdata.answerstext;
+                    @TeamAnswer.answersText = jdata.answersText;
 
                     TeamAnswerLista.Add(@TeamAnswer);
                     db.Entry(@TeamAnswer).State = EntityState.Modified;

@@ -6,6 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+using System.Web.Http.Cors;
 
 namespace rsc_harambe
 {
@@ -16,7 +17,10 @@ namespace rsc_harambe
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            /*var corsAttr = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+            config.EnableCors(corsAttr);*/
 
             // Web API routes
             config.MapHttpAttributeRoutes();

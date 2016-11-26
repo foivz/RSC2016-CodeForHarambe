@@ -58,7 +58,7 @@ namespace rsc_harambe.Controllers
                         Team @Team = new Team();
 
                         @Team.name = jdata.name;
-                        @Team.eventID = jdata.eventid;
+                        @Team.eventID = jdata.eventID;
 
                         db.Teams.Add(@Team);
                         db.SaveChanges();
@@ -76,7 +76,7 @@ namespace rsc_harambe.Controllers
 
                     @Team.id = jdata.id;
                     @Team.name = jdata.name;
-                    @Team.eventID = jdata.eventid;
+                    @Team.eventID = jdata.eventID;
 
                     TeamLista.Add(@Team);
                     db.Entry(@Team).State = EntityState.Modified;

@@ -1,4 +1,5 @@
-﻿<div class="jumbotron">
+﻿@model rsc_harambe.Models.FirebaseModel
+<div class="jumbotron">
     <h1>Code for Harambe</h1>
     <p class="lead">Bitchez be nothing but hoes and tricks</p>
 </div>
@@ -7,23 +8,17 @@
 </div>
 <div class="row">
 
-    <!--<div>
-        <h2>POST test</h2>
-        <input type="button" value="Search" onclick="find();" />
-        <p id="product" />
-    </div>
+    <a href="@Url.Action("CallFirebase")">Send Message From Backed</a>
+    <br />
+    <br />
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-    <script>
-    $(function () {
-        var events = {contact_name :"Scott",company_name:"HP"};
-        $.ajax({
-            type: "POST",
-            data :JSON.stringify(events),
-            url: "api/events",
-            contentType: "application/json"
-        });
-    });
-    </script>-->
+    <div id="messagesDiv"></div>
+    <input type="text" id="nameInput" placeholder="Name">
+    <input type="text" id="messageInput" placeholder="Message...">
 
+    @section scripts {
+        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="~/Scripts/sample.js"></script>
+    }
 </div>

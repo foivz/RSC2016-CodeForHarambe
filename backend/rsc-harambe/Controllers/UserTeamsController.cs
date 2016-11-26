@@ -57,8 +57,8 @@ namespace rsc_harambe.Controllers
                     {
                         UserTeam @UserTeam = new UserTeam();
 
-                        @UserTeam.userID = jdata.userid;
-                        @UserTeam.teamID = jdata.teamid;
+                        @UserTeam.userID = jdata.userID;
+                        @UserTeam.teamID = jdata.teamID;
 
                         db.UserTeams.Add(@UserTeam);
                         db.SaveChanges();
@@ -75,8 +75,8 @@ namespace rsc_harambe.Controllers
                     UserTeam @UserTeam = new UserTeam();
 
                     @UserTeam.id = jdata.id;
-                    @UserTeam.userID = jdata.userid;
-                    @UserTeam.teamID = jdata.teamid;
+                    @UserTeam.userID = jdata.userID;
+                    @UserTeam.teamID = jdata.teamID;
 
                     UserTeamLista.Add(@UserTeam);
                     db.Entry(@UserTeam).State = EntityState.Modified;

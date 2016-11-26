@@ -57,9 +57,9 @@ namespace rsc_harambe.Controllers
                     {
                         Answer @Answer = new Answer();
 
-                        @Answer.questionID = jdata.questionid;
-                        @Answer.aText = jdata.atext;
-                        @Answer.isCorrect = jdata.iscorrect;
+                        @Answer.questionID = jdata.questionID;
+                        @Answer.aText = jdata.aText;
+                        @Answer.isCorrect = jdata.isCorrect;
 
                         db.Answers.Add(@Answer);
                         db.SaveChanges();
@@ -76,9 +76,9 @@ namespace rsc_harambe.Controllers
                     Answer @Answer = new Answer();
 
                     @Answer.id = jdata.id;
-                    @Answer.questionID = jdata.questionid;
-                    @Answer.aText = jdata.atext;
-                    @Answer.isCorrect = jdata.iscorrect;
+                    @Answer.questionID = jdata.questionID;
+                    @Answer.aText = jdata.aText;
+                    @Answer.isCorrect = jdata.isCorrect;
 
                     AnswerLista.Add(@Answer);
                     db.Entry(@Answer).State = EntityState.Modified;

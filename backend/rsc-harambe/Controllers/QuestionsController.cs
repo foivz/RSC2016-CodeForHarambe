@@ -57,10 +57,10 @@ namespace rsc_harambe.Controllers
                     {
                         Question @Question = new Question();
 
-                        @Question.qType = jdata.qtype;
-                        @Question.qText = jdata.qtext;
-                        @Question.qTime = jdata.qtime;
-                        @Question.eventID = jdata.eventid;
+                        @Question.qType = jdata.qType;
+                        @Question.qText = jdata.qText;
+                        @Question.qTime = jdata.qTime;
+                        @Question.eventID = jdata.eventID;
 
                         db.Questions.Add(@Question);
                         db.SaveChanges();
@@ -77,10 +77,10 @@ namespace rsc_harambe.Controllers
                     Question @Question = new Question();
 
                     @Question.id = jdata.id;
-                    @Question.qType = jdata.qtype;
-                    @Question.qText = jdata.qtext;
-                    @Question.qTime = jdata.qtime;
-                    @Question.eventID = jdata.eventid;
+                    @Question.qType = jdata.qType;
+                    @Question.qText = jdata.qText;
+                    @Question.qTime = jdata.qTime;
+                    @Question.eventID = jdata.eventID;
 
                     QuestionLista.Add(@Question);
                     db.Entry(@Question).State = EntityState.Modified;
