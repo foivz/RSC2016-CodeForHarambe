@@ -99,11 +99,30 @@ textarea {
     float: left;
     width: 31%;
     margin: 10px 1%;
+    border: none
+}
+
+.panel-primary .panel-heading {
+    background-color: #eeeeee;
+    background-image: none;
+    border: none;
+    color: #000;
+}
+
+.panel-primary .panel-body {
+    background-color: #eeeeee;
 }
 
 .add-new {
     width: 97%;
     text-align: center;
+}
+
+.add-new .panel-heading {
+    background: #428bca;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 5px;
 }
 
 .edit-form .btn-success {
@@ -151,7 +170,7 @@ textarea {
     font-size: 17px;
 }
 
-.question-container {
+.items-container {
     background: #eeeeee;
     border-top: 2px solid #428bca;
     -webkit-box-sizing: border-box;
@@ -161,17 +180,17 @@ textarea {
     margin: 0 0 20px 0;
 }
 
-.question-container .answer-input {
+.items-container .answer-input {
     width: 95%;
     float: left;
 }
 
-.question-container .answer-checkbox {
+.items-container .answer-checkbox {
     width: 40px;
     height: 25px;
 }
 
-.add-question {
+.add-item {
     background: #428bca;
     padding: 10px 0;
     text-align: center;
