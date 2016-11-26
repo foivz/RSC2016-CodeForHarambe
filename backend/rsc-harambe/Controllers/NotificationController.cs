@@ -15,6 +15,7 @@ namespace rsc_harambe.Controllers
 {
     public class NotificationController : ApiController
     {
+        private KvizEntities db = new KvizEntities();
         private IFirebaseClient _client;
         // GET: api/Notification
         public IEnumerable<string> Get()
@@ -23,39 +24,22 @@ namespace rsc_harambe.Controllers
         }
 
         // GET: api/Notification/5
-        public string Get(int id)
+        public async Task<bool> Get(int? id)
         {
-            return "value";
-        }
+            //dohvati event
+            if (id == null)
+            {
+                return false;
+            }
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return false;
+            }
 
-        // POST: api/Notification
-        public async Task<List<Event>> Post()
-        {
-            string result = await Request.Content.ReadAsStringAsync();
-
-            List<Event> notificationList = new List<Event>();
-
-            dynamic jobj = JsonConvert.DeserializeObject(result);
-            string action = jobj.action;
-
-                foreach (dynamic jdata in jobj.data)
-                {
-                    Event @event = new Event();
-
-                @event.name = jdata.name;
-                @event.eDesc = jdata.edesc;
-                @event.eDate = jdata.edate;
-                @event.loc = jdata.loc;
-                @event.prize = jdata.prize;
-                @event.rules = jdata.rules;
-                @event.teamsize = jdata.teamsize;
-                @event.eStatus = jdata.estatus;
-
-                notificationList.Add(@event);
-
-                string path = "newEvents/";
-                string fName = "admin";
-                string fText = JsonConvert.SerializeObject(@event);
+            string path = "newEvents/";
+            string fName = "admin";
+            string fText = "Event " + @event.name + " is starting soon!";
 
                 IFirebaseConfig config = new FirebaseConfig
                 {
@@ -63,15 +47,23 @@ namespace rsc_harambe.Controllers
                     BasePath = "https://rsc-harambe.firebaseio.com"
                 };
 
-                _client = new FirebaseClient(config);
+            _client = new FirebaseClient(config);
 
-                await _client.PushAsync(path, new
-                {
-                    name = fName,
-                    text = fText
-                });
-            }
-                return notificationList; // "200 OK";
+            await _client.PushAsync(path, new
+            {
+                name = fName,
+                text = fText
+            });
+
+            return true; // "200 OK";
+        }
+
+        // POST: api/Notification
+        public async Task<bool> Post()
+        {
+            string result = await Request.Content.ReadAsStringAsync();
+
+            return true;
             }
 
         // PUT: api/Notification/5

@@ -73,7 +73,7 @@ namespace rsc_harambe.Controllers
 
                         string path = "room/" + jdata.teamid;
                         string fName = jdata.teamid;
-                        string fText = JsonConvert.SerializeObject(jdata.answerstext);
+                        string fText = jdata.answersText;
 
                         IFirebaseConfig config = new FirebaseConfig
                         {
