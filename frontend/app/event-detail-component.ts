@@ -85,6 +85,28 @@ export class EventDetailComponent implements OnInit {
             });
     }
 
+    deleteQuestion(id: number): void {
+      this.questionService.remove(id).then(() => {
+          this.questions.forEach((question, index) => {
+              delete this.questions[index];
+          });
+      });
+    }
+
+    deleteAnswer(id: number, qid: number): void {
+        this.answerService.remove(id).then(() => {
+            this.questions.forEach((question) => {
+                if(question.id==qid) {
+                    question.answers.forEach((answer, i) => {
+                        if(answer.id==id) {
+                            delete question.answers[i];
+                        }
+                    });
+                }
+            });
+        });
+    }
+
   goBack(): void {
     this.location.back();
   }

@@ -97,6 +97,7 @@
                 </div>
 
                 <div *ngFor="let question of questions" class="items-container">
+                    <div (click)="deleteQuestion(question.id)" class="remove-button remove-button-right"><i class="fa fa-remove"></i></div>
                     <div class="form-group field-discount-export_id">
                         <label class="control-label" >Question</label>
                         <input [(ngModel)]="question.qText" class="form-control" type="text">
@@ -119,6 +120,7 @@
 
                     <h4>Answers</h4>
                     <div *ngFor="let answer of question.answers" class="form-group field-discount-export_id">
+                        <div (click)="deleteAnswer(answer.id, question.id)" class="remove-button"><i class="fa fa-remove"></i></div>
                         <input [(ngModel)]="answer.aText" class="form-control answer-input" type="text">
                         <input [(ngModel)]="answer.isCorrect" class="orm-control answer-checkbox" type="checkbox" />
 
@@ -130,7 +132,7 @@
                 <div (click)="addQuestion()" class="add-item">New question +</div>
 
                 <div class="form-group">
-                    <button (click)="save()" type="submit" class="btn btn-success">Create</button>
+                    <button (click)="save()" type="submit" class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>
