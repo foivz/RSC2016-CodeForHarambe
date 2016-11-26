@@ -54,6 +54,15 @@ public class ApiHandler {
             return  result;
         }
 
+        public List<Events> getEvents(String stringUrl){
+            List<Events> eventsList = new ArrayList<>();
+            String result = getResponse(stringUrl, "GET");
+
+
+
+            return  eventsList;
+        }
+
         //returns list of strings contains all values for specific attribute name
         public List<String> getAttributes(String stringUrl, String attributeName){
             List<String> resultList = new ArrayList<>();

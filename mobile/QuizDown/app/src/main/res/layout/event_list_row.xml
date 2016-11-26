@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/eventTitle"
+        android:textColor="@color/title"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/eventDescription"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/eventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/eventDate"
+        android:textColor="@color/year"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btInfo"
+        android:text="Info"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/eventDescription"
+        style="@style/Widget.AppCompat.Button"
+        android:visibility="visible"
+        android:elevation="0dp"
+        android:background="@android:color/transparent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical" />
+
+
+    <Button
+        android:id="@+id/btParticipate"
+        android:text="Participate"
+        android:layout_width="150dp"
+        style="@style/Widget.AppCompat.Button"
+        android:visibility="visible"
+        android:elevation="0dp"
+        android:layout_toRightOf="@id/btInfo"
+        android:layout_below="@id/eventDescription"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="10dp"/>
+
+    <View android:layout_width="1dip"
+        android:layout_height="fill_parent"
+        android:background="#000" />
+</RelativeLayout>
