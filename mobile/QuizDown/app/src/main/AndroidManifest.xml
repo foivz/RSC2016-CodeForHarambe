@@ -20,8 +20,7 @@
         <activity android:name=".WaitQuestionActivity" />
         <activity android:name=".WaitResultActivity" />
         <activity android:name=".ResultsActivity" />
-        <activity android:name=".LogInActivity" />
-        <activity android:name=".EventDetails"></activity>
+        <activity android:name=".LogInActivity"></activity>
     </application>
 
 </manifest>
