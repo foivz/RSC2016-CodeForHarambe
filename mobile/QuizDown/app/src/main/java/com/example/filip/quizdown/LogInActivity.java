@@ -71,7 +71,7 @@ public class LogInActivity extends AppCompatActivity {
                     u.setToken(uid);
                     String idUser = "";
                     idUser = new ApiHandler().getUserIdByToken("http://rsc-harambe.azurewebsites.net/api/usertoken",LogInActivity.uid);
-                    if(idUser == "")
+                    if(idUser.length() == 0)
                         new ApiHandler().insertUser("http://rsc-harambe.azurewebsites.net/api/users", u);
 
                     Toast.makeText(LogInActivity.this, ime, Toast.LENGTH_LONG).show();
