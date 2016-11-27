@@ -1,0 +1,68 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="fa fa-mortar-board"></i> ModeratorApp</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="#">Overview <span class="sr-only"></span></a></li>
+                <li (click)="gotoEvents()" class="active"><a>Events</a></li>
+                <li><a href="#">Teams</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Results</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Events</h1>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div (click)="gotoCreate()" class="panel panel-primary add-new">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Add +</h3>
+                        </div>
+                    </div>
+                    <div *ngFor="let event of events" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{event.name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills" role="tablist">
+                                <li role="presentation"><a href="#">Teams <span class="badge">{{event.usersCount}}</span></a></li>
+                                <li role="presentation">
+                                    <a *ngIf="event.eStatus==0" href="#">
+                                        Status <span class="badge">Closed</span>
+                                    </a>
+                                    <a *ngIf="event.eStatus==1" href="#">
+                                        Status <span class="badge">Open</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <hr />
+                            <button (click)="gotoDashboard(event.id)" type="button" class="btn btn-default"><i class="fa fa-hourglass-start"></i> Start</button>
+                            <button (click)="gotoDetail(event.id)" type="button" class="btn btn-success">Edit</button>
+                            <button (click)="notify(event.id)" type="button" class="btn btn-warning">Notify</button>
+                            <button (click)="deleteEvent(event.id)" type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

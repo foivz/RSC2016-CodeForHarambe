@@ -1,0 +1,140 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="fa fa-mortar-board"></i> ModeratorApp</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="#">Overview <span class="sr-only"></span></a></li>
+                <li (click)="gotoEvents()" class="active"><a>Events</a></li>
+                <li><a href="#">Teams</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Results</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Event create</h1>
+
+            <div *ngIf="event" class="edit-form">
+                <input type="hidden" name="_csrf" value="Z2dFbGwwRUg1FDANLn5yZVBUdD1eV3YZUzI3XSFpMnszPTU/GEAmOQ==">
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Name</label>
+                    <input [(ngModel)]="event.name" type="text"class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Description</label>
+                    <input [(ngModel)]="event.eDesc" type="text" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Date</label>
+                    <input [(ngModel)]="event.eDate" type="text" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Location</label>
+                    <input [(ngModel)]="event.loc" type="text" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Prize ($)</label>
+                    <input [(ngModel)]="event.prize" type="text" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Rules</label>
+                    <input [(ngModel)]="event.rules" type="text" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Team size limit</label>
+                    <input [(ngModel)]="event.teamsize" type="text" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div class="form-group field-discount-export_id">
+                    <label class="control-label" >Status</label>
+                    <input [(ngModel)]="event.eStatus" type="checkbox" class="form-control" name="Discount[export_id]">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <div *ngFor="let question of questions" class="items-container">
+                    <div (click)="deleteQuestion(question.id)" class="remove-button remove-button-right"><i class="fa fa-remove"></i></div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Question</label>
+                        <input [(ngModel)]="question.qText" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Time (seconds)</label>
+                        <input [(ngModel)]="question.qTime" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Type</label>
+                        <select [(ngModel)]="question.qType" class="form-control">
+                            <option value="1">Single answer</option>
+                            <option value="2">Multiple answer</option>
+                            <option value="3">Manual input</option>
+                            <option value="4">Multimedia</option>
+                        </select>
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <hr />
+
+                    <h4>Answers</h4>
+                    <div *ngFor="let answer of question.answers" class="form-group field-discount-export_id">
+                        <div (click)="deleteAnswer(answer.id, question.id)" class="remove-button"><i class="fa fa-remove"></i></div>
+                        <input [(ngModel)]="answer.aText" class="form-control answer-input" type="text">
+                        <input [(ngModel)]="answer.isCorrect" class="orm-control answer-checkbox" type="checkbox" />
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div (click)="addAnswer(question.id)" class="add-item">Add answer +</div>
+                </div>
+
+                <div (click)="addQuestion()" class="add-item">New question +</div>
+
+                <div class="form-group">
+                    <button (click)="save()" type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
