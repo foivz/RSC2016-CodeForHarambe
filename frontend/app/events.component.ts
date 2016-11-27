@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
     moduleId: module.id,
     selector: 'my-events',
     templateUrl: 'events.component.html',
-    styleUrls: ['css/dashboard.css', 'css/theme.css'],
+    styleUrls: ['css/main.css', 'css/dashboard.css', 'css/theme.css'],
     providers: [EventService]
 })
 
@@ -24,7 +24,15 @@ export class EventsComponent implements OnInit {
 
     getEvents(): void {
         this.eventService.getEvents().subscribe(
-            events => this.events = events,
+            events => {
+                this.events = events;
+
+                for (let event of this.events) {
+                    this.eventService.getEventUsersCount(event.id).subscribe(
+                        count => event.usersCount = +count[0].count
+                    );
+                }
+            },
             error =>  this.errorMessage = <any>error
         );
     }
@@ -37,16 +45,30 @@ export class EventsComponent implements OnInit {
     }
 
     gotoDetail(id: number): void {
-        this.router.navigate(['/detail', id]);
+        this.router.navigate(['/events/detail/', id]);
     }
 
     gotoCreate(): void {
-        this.router.navigate(['/create']);
+        this.router.navigate(['/events/create']);
+    }
+
+    notify(id: number): void {
+        this.eventService.notify(id);
     }
 
     remove(id: number): void {
         this.eventService.remove(id)
             .then(() => this.router.navigate(['/events']));
+    }
+
+    deleteEvent(id: number): void {
+        this.eventService.remove(id).then(() => {
+            this.events.forEach((event, index) => {
+                if(event.id==id) {
+                    this.events.splice(index, 1);
+                }
+            });
+        });
     }
 
 }

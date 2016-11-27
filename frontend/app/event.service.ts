@@ -29,6 +29,26 @@ export class EventService {
       .catch(this.handleError);
   }
 
+    notify (id: number): any {
+        let params = new URLSearchParams();
+        params.set('format', 'json');
+        params.set('callback', 'JSONP_CALLBACK');
+
+        return this.http.get(this.eventsUrl+'/notification/'+id, {headers: this.headers})
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+    getEventUsersCount (id: number): Observable<any> {
+        let params = new URLSearchParams();
+        params.set('format', 'json');
+        params.set('callback', 'JSONP_CALLBACK');
+
+        return this.http.get(this.eventsUrl+'/participantcount/'+id, {headers: this.headers})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
   create(name: string, eDesc: string, eDate: string, loc: string, prize: string, teamsize: number, eStatus: number): Observable<Event> {
     const url = this.eventsUrl+'/qevents';
 

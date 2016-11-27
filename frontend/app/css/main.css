@@ -116,6 +116,7 @@ textarea {
 .add-new {
     width: 97%;
     text-align: center;
+    cursor: pointer;
 }
 
 .add-new .panel-heading {

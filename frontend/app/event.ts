@@ -7,4 +7,5 @@ export class Event {
   prize: string;
   teamsize: number;
   eStatus: number;
+  usersCount: number;
 }
