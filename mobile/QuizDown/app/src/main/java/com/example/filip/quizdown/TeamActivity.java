@@ -87,7 +87,8 @@ public class TeamActivity extends AppCompatActivity {
                         t.setName(name);
                         t.setEventId(message);
                         String id = new ApiHandler().insertTeam("http://rsc-harambe.azurewebsites.net/api/teams", t);
-                        //new ApiHandler().insertUserToTeam(idUser, id);
+                        String idUser = new ApiHandler().getUserIdByToken("http://rsc-harambe.azurewebsites.net/api/usertoken",LogInActivity.uid);
+                        new ApiHandler().insertUserToTeam("http://rsc-harambe.azurewebsites.net/api/userteams",idUser, id);
                         Intent i = new Intent(getApplicationContext(), WaitResultActivity.class);
                         startActivity(i);
                     }

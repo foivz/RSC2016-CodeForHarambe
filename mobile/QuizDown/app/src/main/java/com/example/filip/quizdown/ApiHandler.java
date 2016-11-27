@@ -98,6 +98,22 @@ public class ApiHandler {
             return teams;
         }
 
+        public String getUserIdByToken(String stringUrl, String token){
+            stringUrl += "/" + token;
+
+            String result = getResponse(stringUrl, "GET");
+
+            try{
+                JSONArray jsonArray = new JSONArray(result);
+                JSONObject o = jsonArray.getJSONObject(0);
+                result = o.get("id").toString();
+            } catch (JSONException e) {
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            }
+
+            return result;
+        }
+
         //gets the whole JSON in string
         private String getResponse(String stringUrl, String method){
             String result = "";
@@ -192,7 +208,31 @@ public class ApiHandler {
                 Log.e(TAG, "JSONException: " + e.getMessage());
             }
 
-            String result = sendPost(stringUrl, json);
+            sendPost(stringUrl, json);
+        }
+
+        public void insertUserToTeam(String stringUrl, String user, String team){
+            String json = "";
+
+            try {
+                JSONObject parentObject = new JSONObject();
+                parentObject.accumulate("action", "create");
+
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("userID", user);
+                jsonObject.accumulate("teamID", team);
+
+                JSONArray array = new JSONArray();
+                array.put(jsonObject);
+                parentObject.accumulate("data", array);
+                json = parentObject.toString();
+
+            }catch (JSONException e){
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            }
+
+            sendPost(stringUrl, json);
         }
 
         //update event, sends JSON to server with POST method
