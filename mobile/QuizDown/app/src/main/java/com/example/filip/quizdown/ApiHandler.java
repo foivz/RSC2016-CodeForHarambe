@@ -35,24 +35,26 @@ public class ApiHandler {
         //------------------GET--------------------------------------
 
         //get value of some attribute with id as value
-    /* public String getAttributeWithValue(String stringUrl, String value, String attributeName){
-            String result = "";
-            List<String> resultList;
+        public Events getEventById(String stringUrl, String id){
+            Events event = new Events();
+            stringUrl += "/" + id;
+            String result = getResponse(stringUrl, "GET");
 
-            result = getResponse(stringUrl, "GET", value);
             try{
-                resultList = new ParseJSON().execute(result, attributeName).get();
-                if(!resultList.isEmpty()) {
-                    result = resultList.get(0);
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i=0; i<jsonArray.length(); i++) {
+                    event = new ParseEventJSON().execute(jsonArray.getJSONObject(i)).get();
                 }
-            }catch (InterruptedException e){
+            } catch (JSONException e) {
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            } catch (InterruptedException e) {
                 Log.e(TAG, "InterruptedException: " + e.getMessage());
-            }catch (ExecutionException e){
+            } catch (ExecutionException e) {
                 Log.e(TAG, "ExecutionException: " + e.getMessage());
             }
 
-            return  result;
-        }*/
+            return event;
+        }
 
         public List<Events> getEvents(String stringUrl){
             List<Events> eventsList = new ArrayList<>();
@@ -73,6 +75,27 @@ public class ApiHandler {
 
 
             return  eventsList;
+        }
+
+        public List<Team> getTeamByEventId(String stringUrl, String id){
+            List<Team> teams = new ArrayList<>();
+            stringUrl += "/" + id;
+            String result = getResponse(stringUrl, "GET");
+
+            try{
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i=0; i<jsonArray.length(); i++) {
+                    teams.add(new ParseTeamJSON().execute(jsonArray.getJSONObject(i)).get());
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            } catch (InterruptedException e) {
+                Log.e(TAG, "InterruptedException: " + e.getMessage());
+            } catch (ExecutionException e) {
+                Log.e(TAG, "ExecutionException: " + e.getMessage());
+            }
+
+            return teams;
         }
 
         //gets the whole JSON in string
@@ -133,6 +156,45 @@ public class ApiHandler {
 
             return result;
         }*/
+
+        public String insertTeam(String stringUrl, Team team){
+            String json = "";
+
+            try {
+                JSONObject parentObject = new JSONObject();
+                parentObject.accumulate("action", "create");
+
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("name", team.getName());
+                jsonObject.accumulate("eventID", team.getEventId());
+
+                JSONArray array = new JSONArray();
+                array.put(jsonObject);
+                parentObject.accumulate("data", array);
+                json = parentObject.toString();
+
+            }catch (JSONException e){
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            }
+
+            String result = sendPost(stringUrl, json);
+            JSONArray jsonArray = null;
+            List<Team> teams = new ArrayList<>();
+            try {
+                jsonArray = new JSONArray(result);
+                for (int i=0; i<jsonArray.length(); i++) {
+                    teams.add(new ParseTeamJSON().execute(jsonArray.getJSONObject(i)).get());
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            } catch (InterruptedException e) {
+                Log.e(TAG, "InterruptedException: " + e.getMessage());
+            } catch (ExecutionException e) {
+                Log.e(TAG, "ExecutionException: " + e.getMessage());
+            }
+            return teams.get(0).getId();
+        }
 
         //update event, sends JSON to server with POST method
         /*public String updateEvent(String stringUrl, Events events, int id){
@@ -251,10 +313,10 @@ public class ApiHandler {
         private class ParseEventJSON extends AsyncTask<JSONObject, Void, Events>{
             @Override
             protected Events doInBackground(JSONObject... objects) {
-                List<String> stringList = new ArrayList<>();
                 Events event = new Events();
                 try {
 
+                    event.setId(objects[0].get("id").toString());
                     event.setName(objects[0].get("name").toString());
                     event.setDescription(objects[0].get("eDesc").toString());
                     event.setDate(objects[0].get("eDate").toString());
@@ -267,6 +329,26 @@ public class ApiHandler {
                     Log.e(TAG, "JSONException: " + e.getMessage());
                 }
                 return event;
+            }
+        }
+
+        private class ParseTeamJSON extends  AsyncTask<JSONObject, Void, Team>{
+
+            @Override
+            protected Team doInBackground(JSONObject... objects) {
+                Team team = new Team();
+                try{
+                    team.setName(objects[0].get("name").toString());
+                    team.setEventId(objects[0].get("eventID").toString());
+                    if(objects[0].get("Event") != null) {
+                        JSONObject j = (JSONObject) objects[0].get("Event");
+                        team.setId(j.get("id").toString());
+                    }
+                }catch (JSONException e){
+                Log.e(TAG, "JSONException: " + e.getMessage());
+                }
+
+                return team;
             }
         }
     }

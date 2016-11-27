@@ -11,7 +11,7 @@ import java.util.Date;
 public class Events {
     private static String TAG = Events.class.getSimpleName();
 
-    private int id;
+    private String id;
     private String name;
     private String description;
     private Date date;
@@ -24,7 +24,7 @@ public class Events {
     public Events() {
     }
 
-    public Events(int id, String teamSize, String rules, String prize, String location, Date date, String description, String name) {
+    public Events(String id, String teamSize, String rules, String prize, String location, Date date, String description, String name) {
         this.id = id;
         this.teamSize = teamSize;
         this.rules = rules;
@@ -92,11 +92,11 @@ public class Events {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

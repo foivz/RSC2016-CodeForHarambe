@@ -21,6 +21,7 @@
         <activity android:name=".WaitResultActivity" />
         <activity android:name=".ResultsActivity" />
         <activity android:name=".LogInActivity"></activity>
+        <activity android:name=".EventDetails"/>
     </application>
 
 </manifest>
