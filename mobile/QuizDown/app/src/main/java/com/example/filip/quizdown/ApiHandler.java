@@ -384,8 +384,7 @@ public class ApiHandler {
                         team.setId(objects[0].get("id").toString());
                         return team;
                     }
-                    JSONObject j = (JSONObject) objects[0].get("Event");
-                    team.setId(j.get("id").toString());
+                    team.setId(objects[0].get("id").toString());
                 }catch (JSONException e){
                 Log.e(TAG, "JSONException: " + e.getMessage());
                 }
