@@ -89,7 +89,9 @@ export class EventDetailComponent implements OnInit {
     deleteQuestion(id: number): void {
       this.questionService.remove(id).then(() => {
           this.questions.forEach((question, index) => {
-              this.questions.splice(index+1, 1);
+              if(question.id==id) {
+                  this.questions.splice(index, 1);
+              }
           });
       });
     }
@@ -100,7 +102,7 @@ export class EventDetailComponent implements OnInit {
                 if(question.id==qid) {
                     question.answers.forEach((answer, i) => {
                         if(answer.id==id) {
-                            question.answers.splice(i+1, 1);
+                            question.answers.splice(i, 1);
                         }
                     });
                 }
