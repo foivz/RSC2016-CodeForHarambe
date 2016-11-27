@@ -37,7 +37,8 @@ public class EventFragment extends Fragment {
 
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
 
-        prepareData();
+        ApiHandler handler = new ApiHandler();
+        eventList = handler.getEvents("http://rsc-harambe.azurewebsites.net/api/qevents");
 
 
         mAdapter = new EventAdapter(eventList);
@@ -52,14 +53,5 @@ public class EventFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         return rootView;
-    }
-
-    private void prepareData(){
-        Events events = new Events(1, "asd", "asdasd", "sdadasd", "asdsa", "19.01.1993", "desc", "Title");
-        eventList.add(events);
-        Events events2 = new Events(2, "asd", "asdasd", "sdadasd", "asdsa", "19.02.1993", "desc", "Title");
-        eventList.add(events2);
-        Events events3 = new Events(3, "asd", "asdasd", "sdadasd", "aaaaaaaa", "19.02.1993", "desc", "Title");
-        eventList.add(events3);
     }
 }

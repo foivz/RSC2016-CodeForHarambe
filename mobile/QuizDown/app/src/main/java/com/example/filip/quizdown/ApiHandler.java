@@ -35,7 +35,7 @@ public class ApiHandler {
         //------------------GET--------------------------------------
 
         //get value of some attribute with id as value
-        public String getAttributeWithValue(String stringUrl, String value, String attributeName){
+    /* public String getAttributeWithValue(String stringUrl, String value, String attributeName){
             String result = "";
             List<String> resultList;
 
@@ -52,31 +52,27 @@ public class ApiHandler {
             }
 
             return  result;
-        }
+        }*/
 
         public List<Events> getEvents(String stringUrl){
             List<Events> eventsList = new ArrayList<>();
             String result = getResponse(stringUrl, "GET");
 
-
-
-            return  eventsList;
-        }
-
-        //returns list of strings contains all values for specific attribute name
-        public List<String> getAttributes(String stringUrl, String attributeName){
-            List<String> resultList = new ArrayList<>();
-
-            String result = getResponse(stringUrl, "GET");
             try{
-                resultList = new ParseJSON().execute(result, attributeName).get();
-            }catch (InterruptedException e){
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i=0; i<jsonArray.length(); i++) {
+                    eventsList.add(new ParseEventJSON().execute(jsonArray.getJSONObject(i)).get());
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            } catch (InterruptedException e) {
                 Log.e(TAG, "InterruptedException: " + e.getMessage());
-            }catch (ExecutionException e){
+            } catch (ExecutionException e) {
                 Log.e(TAG, "ExecutionException: " + e.getMessage());
             }
 
-            return resultList;
+
+            return  eventsList;
         }
 
         //gets the whole JSON in string
@@ -252,21 +248,25 @@ public class ApiHandler {
 
 
         //Thread for parsing JSON
-        private class ParseJSON extends AsyncTask<String, Void, List<String>>{
+        private class ParseEventJSON extends AsyncTask<JSONObject, Void, Events>{
             @Override
-            protected List<String> doInBackground(String... strings) {
+            protected Events doInBackground(JSONObject... objects) {
                 List<String> stringList = new ArrayList<>();
+                Events event = new Events();
                 try {
-                    JSONObject jsonObj;
-                    JSONArray jsonArray = new JSONArray(strings[0]);
-                    for(int i=0; i<jsonArray.length(); i++){
-                        jsonObj = jsonArray.getJSONObject(i);
-                        stringList.add(jsonObj.getString(strings[1]));
-                    }
+
+                    event.setName(objects[0].get("name").toString());
+                    event.setDescription(objects[0].get("eDesc").toString());
+                    event.setDate(objects[0].get("eDate").toString());
+                    event.setLocation(objects[0].get("loc").toString());
+                    event.setPrize(objects[0].get("prize").toString());
+                    event.setRules(objects[0].get("rules").toString());
+                    event.setTeamSize(objects[0].get("teamsize").toString());
+
                 }catch (JSONException e){
                     Log.e(TAG, "JSONException: " + e.getMessage());
                 }
-                return stringList;
+                return event;
             }
         }
     }
