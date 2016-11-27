@@ -19,6 +19,15 @@ export class TeamService {
             .catch(this.handleError);
     }
 
+    nextQuestion(eid: number, qid: number): any {
+        const url = this.eventsUrl+'/quiz';
+
+        return this.http
+            .post(url, JSON.stringify({id: eid, pitanje: qid}), {headers: this.headers})
+            .toPromise()
+            .catch(this.handleError);
+    }
+
     getEventTeams(id: number): Observable<Team[]> {
         let params = new URLSearchParams();
         params.set('format', 'json');

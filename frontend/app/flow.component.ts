@@ -38,5 +38,14 @@ export class FlowComponent implements OnInit {
                     .subscribe(questions => this.questions = questions);
             });
     }
+
+    nextQuestion(eid: number, qid: number): void {
+        this.teamService.nextQuestion(eid, qid).then(
+            () => {
+                if(qid==0) {
+                    this.router.navigate(['/events']);
+                }
+            });
+    }
 }
 
