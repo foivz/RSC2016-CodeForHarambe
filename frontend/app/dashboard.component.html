@@ -1,68 +1,29 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">ModeratorApp</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="list.html">Events</a></li>
+                <li class="active"><a href="#">Overview <span class="sr-only"></span></a></li>
+                <li (click)="gotoEvents()"><a>Events</a></li>
                 <li><a href="#">Teams</a></li>
-                <li><a href="#">Questions</a></li>
                 <li><a href="#">Users</a></li>
                 <li><a href="#">Results</a></li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
+        <div *ngIf="event" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Quiz dashboard: {{event.name}}</h1>
 
             <div class="row placeholders">
-                <div class="col-xs-3 placeholder event-start">
-                    <a href="#" class="btn btn-default btn-circle">
-                        <i class="fa fa-hourglass-start"></i><br />
-                        START
-                    </a>
-                    <h4>Event name</h4>
-                    <span class="text-muted">Team name</span>
+                <div *ngFor="let team of teams">
+                    <div *ngIf="team.userCount>0" class="col-xs-3 placeholder event-start">
+                        <a (click)="gotoFlow(team.id)" class="btn btn-default btn-circle">
+                            <i class="fa fa-hourglass-start"></i><br />
+                            START
+                        </a>
+                        <h4 *ngIf="team.name!=''">{{team.name}}</h4>
+                        <h4 *ngIf="team.name==''">NO NAME</h4>
+                        <span class="text-muted">{{team.userCount}} <i class="fa fa-user"></i></span>
+                    </div>
                 </div>
-                <div class="col-xs-3 placeholder event-start">
-                    <a href="#" class="btn btn-default btn-circle">
-                        <i class="fa fa-hourglass-start"></i><br />
-                        START
-                    </a>
-                    <h4>Event name</h4>
-                    <span class="text-muted">Team name</span>
-                </div>
-                <div class="col-xs-3 placeholder event-start">
-                    <a href="#" class="btn btn-default btn-circle">
-                        <i class="fa fa-hourglass-start"></i><br />
-                        START
-                    </a>
-                    <h4>Event name</h4>
-                    <span class="text-muted">Team name</span>
-                </div>
-
             </div>
         </div>
     </div>

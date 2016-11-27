@@ -19,6 +19,26 @@ export class TeamService {
             .catch(this.handleError);
     }
 
+    getEventTeams(id: number): Observable<Team[]> {
+        let params = new URLSearchParams();
+        params.set('format', 'json');
+        params.set('callback', 'JSONP_CALLBACK');
+
+        return this.http.get(this.eventsUrl+'/eventteams/'+id, {headers: this.headers})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getTeamUsersCount (id: number): Observable<any> {
+        let params = new URLSearchParams();
+        params.set('format', 'json');
+        params.set('callback', 'JSONP_CALLBACK');
+
+        return this.http.get(this.eventsUrl+'/membercount/'+id, {headers: this.headers})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     getTeam (id: number): Observable<Team> {
         let params = new URLSearchParams();
         params.set('format', 'json');

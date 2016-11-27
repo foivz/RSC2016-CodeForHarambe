@@ -36,6 +36,7 @@
                                 </li>
                             </ul>
                             <hr />
+                            <button (click)="gotoDashboard(event.id)" type="button" class="btn btn-default"><i class="fa fa-hourglass-start"></i> Start</button>
                             <button (click)="gotoDetail(event.id)" type="button" class="btn btn-success">Edit</button>
                             <button (click)="notify(event.id)" type="button" class="btn btn-warning">Notify</button>
                             <button (click)="deleteEvent(event.id)" type="button" class="btn btn-danger">Delete</button>

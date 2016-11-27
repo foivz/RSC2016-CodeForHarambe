@@ -44,6 +44,10 @@ export class EventsComponent implements OnInit {
         this.selectedEvent = event;
     }
 
+    gotoDashboard(id: number): void {
+        this.router.navigate(['/dashboard/'+id]);
+    }
+
     gotoEvents(): void {
         this.router.navigate(['/events']);
     }

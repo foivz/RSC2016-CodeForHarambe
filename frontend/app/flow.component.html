@@ -1,0 +1,26 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div *ngFor="let question of questions; let i = index" [ngClass]="{'item': true, 'active': i==0}">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1 *ngIf="question.qType==1"><i class="fa fa-tag"></i> Question {{i+1}}</h1>
+                    <h1 *ngIf="question.qType==2"><i class="fa fa-tasks"></i> Question {{i+1}}</h1>
+                    <h1 *ngIf="question.qType==3"><i class="fa fa-terminal"></i> Question {{i+1}}</h1>
+                    <h1 *ngIf="question.qType==4"><i class="fa fa-television"></i> Question {{i+1}}</h1>
+                    <h2>{{question.qText}}</h2>
+                    <p style="margin-top: 160px;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
