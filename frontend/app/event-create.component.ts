@@ -30,7 +30,11 @@ export class EventCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save(): void {
+    gotoEvents(): void {
+        this.router.navigate(['/events']);
+    }
+
+    save(): void {
     this.eventService.create(this.name, this.eDesc, this.eDate, this.loc, this.prize, this.teamsize, this.eStatus)
         .subscribe(answer => this.router.navigate(['/events/detail/'+answer[0].id]));
   }

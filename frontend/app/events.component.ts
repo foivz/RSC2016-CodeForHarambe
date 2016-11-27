@@ -44,6 +44,10 @@ export class EventsComponent implements OnInit {
         this.selectedEvent = event;
     }
 
+    gotoEvents(): void {
+        this.router.navigate(['/events']);
+    }
+
     gotoDetail(id: number): void {
         this.router.navigate(['/events/detail/', id]);
     }

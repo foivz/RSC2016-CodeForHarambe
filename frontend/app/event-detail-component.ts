@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import {ActivatedRoute, Params, Router}   from '@angular/router';
 import { Location }                 from '@angular/common';
 import './rxjs-operators';
 import { EventService } from './event.service';
@@ -13,7 +13,7 @@ import {Answer} from "./answer";
   moduleId: module.id,
   selector: 'my-event-detail',
   templateUrl: 'event-detail.component.html',
-  styleUrls: ['css/main.css', 'css/theme.css']
+  styleUrls: ['css/main.css', 'css/dashboard.css', 'css/theme.css']
 })
 export class EventDetailComponent implements OnInit {
   @Input()
@@ -26,7 +26,8 @@ export class EventDetailComponent implements OnInit {
     private questionService: QuestionService,
     private answerService: AnswerService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +66,12 @@ export class EventDetailComponent implements OnInit {
     }
   }
 
-  addQuestion(): void {
+    gotoEvents(): void {
+        this.router.navigate(['/events']);
+    }
+
+
+    addQuestion(): void {
       this.route.params
           .switchMap((params: Params) => this.questionService.create(1, '', 10, this.event.id))
           .subscribe(question => {
