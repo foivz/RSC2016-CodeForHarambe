@@ -32,7 +32,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
                 public void onClick(View v) {
                     String idUser = new ApiHandler().getUserIdByToken("http://rsc-harambe.azurewebsites.net/api/usertoken",LogInActivity.uid);
                     new ApiHandler().insertUserToTeam("http://rsc-harambe.azurewebsites.net/api/userteams", idUser, tvTeamId.getText().toString());
-                    Intent i = new Intent(itemView.getContext(), WaitResultActivity.class);
+                    Intent i = new Intent(itemView.getContext(), QuizActivity.class);
                     itemView.getContext().startActivity(i);
                 }
             });
