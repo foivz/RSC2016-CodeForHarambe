@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import {ActivatedRoute, Params, Router}   from '@angular/router';
 import { Location }                 from '@angular/common';
 import './rxjs-operators';
 import { EventService } from './event.service';
@@ -23,6 +23,7 @@ export class EventCreateComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location
   ) {}
 
@@ -31,7 +32,7 @@ export class EventCreateComponent implements OnInit {
 
   save(): void {
     this.eventService.create(this.name, this.eDesc, this.eDate, this.loc, this.prize, this.teamsize, this.eStatus)
-        .then(() => this.goBack());
+        .subscribe(answer => this.router.navigate(['/events/detail/'+answer[0].id]));
   }
 
   goBack(): void {

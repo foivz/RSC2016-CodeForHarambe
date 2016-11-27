@@ -29,8 +29,12 @@ export class EventService {
       .catch(this.handleError);
   }
 
-  create(name: string, eDesc: string, eDate: string, loc: string, prize: string, teamsize: number, eStatus: number): any {
+  create(name: string, eDesc: string, eDate: string, loc: string, prize: string, teamsize: number, eStatus: number): Observable<Event> {
     const url = this.eventsUrl+'/qevents';
+
+    if(eStatus==null) {
+        eStatus = 0;
+    }
 
     return this.http
       .post(url, JSON.stringify({action: 'create', 'data': [{
@@ -43,17 +47,17 @@ export class EventService {
           eStatus: +eStatus
       }]}), {headers: this.headers
       })
-      .toPromise()
+    .map(this.extractData)
       .catch(this.handleError);
   }
 
   remove(id: number): any {
     const url = this.eventsUrl+'/qevents/'+id;
 
-    return this.http
-      .delete(url, {headers: this.headers})
-      .toPromise()
-      .catch(this.handleError);
+      return this.http
+          .post(url, JSON.stringify({action: 'delete', id: id}), {headers: this.headers})
+          .toPromise()
+          .catch(this.handleError);
   }
 
   update(event: Event): any {
