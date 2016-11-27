@@ -22,6 +22,13 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class LogInActivity extends AppCompatActivity {
@@ -32,26 +39,40 @@ public class LogInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG ="Login activity";
+    private DatabaseReference mDatabase;
+    public ArrayList<Post> notifikacija  =new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
-                    Toast.makeText(LogInActivity.this, "akt pokrenut", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LogInActivity.this, "akt pokrenut", Toast.LENGTH_SHORT).show();
+                    mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.addValueEventListener(postListener);
+                    /*if (notifikacija.size()>=1){
+                        String ime = notifikacija.get(notifikacija.size()-1).getName();
+                        Toast.makeText(LogInActivity.this, ime, Toast.LENGTH_LONG).show();
+                    }*/
 
+                    String ime =  firebaseAuth.getCurrentUser().getDisplayName();
+
+                    Toast.makeText(LogInActivity.this, ime, Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LogInActivity.this, MenuActivity.class ));
+
                 }else{
-                    Toast.makeText(LogInActivity.this, "akt nije pokrenut", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LogInActivity.this, "akt nije pokrenut", Toast.LENGTH_SHORT).show();
                 }
             }
         };
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         mGoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -82,6 +103,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onStart();
 
         mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     private void signIn() {
@@ -136,4 +158,21 @@ public class LogInActivity extends AppCompatActivity {
                     }
                 });
     }
+    ValueEventListener postListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            // Get Post object and use the values to update the UI
+            Post post = dataSnapshot.getValue(Post.class);
+            notifikacija.add(post);
+            // ...
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            // Getting Post failed, log a message
+            Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            // ...
+        }
+    };
+
 }
