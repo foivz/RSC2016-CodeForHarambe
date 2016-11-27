@@ -28,19 +28,12 @@ namespace rsc_harambe.Controllers
         }
 
         // GET: api/QTeamAnswers/5
-        public List<TeamAnswer> Get(int? id)
+        public List<TeamAnswer> Get(int id)
         {
             List<TeamAnswer> TeamAnswerList = new List<TeamAnswer>();
-            if (id == null)
-            {
-                return null;
-            }
-            TeamAnswer @TeamAnswer = db.TeamAnswers.Find(id);
-            if (@TeamAnswer == null)
-            {
-                return null;
-            }
-            TeamAnswerList.Add(@TeamAnswer);
+
+            TeamAnswerList = db.TeamAnswers.Where(t => t.teamID == id).ToList();
+            
             return TeamAnswerList;
         }
 
