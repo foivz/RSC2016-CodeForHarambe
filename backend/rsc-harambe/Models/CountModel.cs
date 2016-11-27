@@ -5,7 +5,8 @@ using System.Web;
 
 namespace rsc_harambe.Models
 {
-    public class FirebaseModel
+    public class CountModel
     {
+        public int count { get; set; }
     }
 }

@@ -98,6 +98,15 @@ namespace rsc_harambe.Controllers
 
                 return eventLista; // "200 OK";
             }
+            else if (action.Equals("delete"))
+            {
+                Event @event = db.Events.Find((int)jobj.id);
+                eventLista.Add(@event);
+                db.Events.Remove(@event);
+                db.SaveChanges();
+
+                return eventLista;
+            }
             else return eventLista; //"500 Internal Server Error";
         }
 

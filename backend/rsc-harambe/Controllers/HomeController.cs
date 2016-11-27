@@ -15,10 +15,6 @@ namespace rsc_harambe.Controllers
     {
         private IFirebaseClient _client;
 
-        /*public HomeController(IFirebaseClient client)
-        {
-            _client = client;
-        }*/
         public ActionResult Index()
         {
 

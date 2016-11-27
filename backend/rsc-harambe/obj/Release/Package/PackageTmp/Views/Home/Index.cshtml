@@ -1,5 +1,4 @@
-﻿@model rsc_harambe.Models.FirebaseModel
-<div class="jumbotron">
+﻿<div class="jumbotron">
     <h1>Code for Harambe</h1>
     <p class="lead">Bitchez be nothing but hoes and tricks</p>
 </div>
@@ -8,17 +7,4 @@
 </div>
 <div class="row">
 
-    <a href="@Url.Action("CallFirebase")">Send Message From Backed</a>
-    <br />
-    <br />
-
-    <div id="messagesDiv"></div>
-    <input type="text" id="nameInput" placeholder="Name">
-    <input type="text" id="messageInput" placeholder="Message...">
-
-    @section scripts {
-        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script src="~/Scripts/sample.js"></script>
-    }
 </div>

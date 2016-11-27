@@ -113,6 +113,15 @@ namespace rsc_harambe.Controllers
 
                 return TeamAnswerLista; // "200 OK";
             }
+            else if (action.Equals("delete"))
+            {
+                TeamAnswer @TeamAnswer = db.TeamAnswers.Find((int)jobj.id);
+                TeamAnswerLista.Add(@TeamAnswer);
+                db.TeamAnswers.Remove(@TeamAnswer);
+                db.SaveChanges();
+
+                return TeamAnswerLista;
+            }
             else return TeamAnswerLista; //"500 Internal Server Error";
         }
 

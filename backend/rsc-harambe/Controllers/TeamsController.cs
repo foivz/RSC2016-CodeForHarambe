@@ -85,6 +85,15 @@ namespace rsc_harambe.Controllers
 
                 return TeamLista; // "200 OK";
             }
+            else if (action.Equals("delete"))
+            {
+                Team @Team = db.Teams.Find((int)jobj.id);
+                TeamLista.Add(@Team);
+                db.Teams.Remove(@Team);
+                db.SaveChanges();
+
+                return TeamLista;
+            }
             else return TeamLista; //"500 Internal Server Error";
         }
 

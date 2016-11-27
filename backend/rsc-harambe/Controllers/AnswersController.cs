@@ -87,6 +87,15 @@ namespace rsc_harambe.Controllers
 
                 return AnswerLista; // "200 OK";
             }
+            else if (action.Equals("delete"))
+            {
+                Answer @Answer = db.Answers.Find((int)jobj.id);
+                AnswerLista.Add(@Answer);
+                db.Answers.Remove(@Answer);
+                db.SaveChanges();
+
+                return AnswerLista;
+            }
             else return AnswerLista; //"500 Internal Server Error";
         }
 

@@ -19,7 +19,7 @@ namespace rsc_harambe
             config.SuppressDefaultHostAuthentication();
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            /*var corsAttr = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+            /*var corsAttr = new EnableCorsAttribute(origins: "*", headers: "Content-Type, soapaction", methods: "GET,POST,OPTIONS,DELETE");
             config.EnableCors(corsAttr);*/
 
             // Web API routes

@@ -85,6 +85,15 @@ namespace rsc_harambe.Controllers
 
                 return UserLista; // "200 OK";
             }
+            else if (action.Equals("delete"))
+            {
+                User @User = db.Users.Find((int)jobj.id);
+                UserLista.Add(@User);
+                db.Users.Remove(@User);
+                db.SaveChanges();
+
+                return UserLista;
+            }
             else return UserLista; //"500 Internal Server Error";
         }
 
