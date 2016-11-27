@@ -39,12 +39,12 @@ export class QuestionService {
             .catch(this.handleError);
     }
 
-    create(qType: number, qText: string, qTime: number, eventID: number): any {
+    create(qType: number, qText: string, qTime: number, eventID: number): Observable<Question> {
         const url = this.eventsUrl+'/questions';
 
         return this.http
             .post(url, JSON.stringify({action: 'create', 'data': [{qType: +qType, qText: qText, qTime: +qTime, eventID: +eventID}]}), {headers: this.headers})
-            .toPromise()
+            .map(this.extractData)
             .catch(this.handleError);
     }
 

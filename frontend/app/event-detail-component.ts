@@ -67,9 +67,10 @@ export class EventDetailComponent implements OnInit {
 
   addQuestion(): void {
       this.route.params
-          .switchMap((params: Params) => this.questionService.create(1, 'New question', 10, this.event.id))
+          .switchMap((params: Params) => this.questionService.create(1, '', 10, this.event.id))
           .subscribe(question => {
-            this.questions.push(question);
+              question[0].answers = [];
+              this.questions.push(question[0])
           });
   }
 
@@ -79,7 +80,7 @@ export class EventDetailComponent implements OnInit {
             .subscribe(answer => {
                 for (let question of this.questions) {
                     if(question.id==id) {
-                        question.answers.push(answer);
+                        question.answers.push(answer[0]);
                     }
                 }
             });
@@ -88,7 +89,7 @@ export class EventDetailComponent implements OnInit {
     deleteQuestion(id: number): void {
       this.questionService.remove(id).then(() => {
           this.questions.forEach((question, index) => {
-              this.questions.splice(index, 1);
+              this.questions.splice(index+1, 1);
           });
       });
     }
@@ -99,7 +100,7 @@ export class EventDetailComponent implements OnInit {
                 if(question.id==qid) {
                     question.answers.forEach((answer, i) => {
                         if(answer.id==id) {
-                            question.answers.splice(i, 1);
+                            question.answers.splice(i+1, 1);
                         }
                     });
                 }
