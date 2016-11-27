@@ -50,5 +50,9 @@ export class DashboardComponent implements OnInit {
     gotoFlow(id: number): void {
         this.router.navigate(['/dashboard/flow/'+id]);
     }
+
+    gotoResult(id: number): void {
+        this.router.navigate(['/dashboard/result/'+id]);
+    }
 }
 

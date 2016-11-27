@@ -219,7 +219,13 @@ textarea {
     cursor: pointer;
 }
 
+.not-correct {
+    border: 2px solid #f00;
+}
 
+.correct {
+    border: 2px solid #090;
+}
 
 
 

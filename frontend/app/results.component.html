@@ -1,0 +1,133 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="fa fa-mortar-board"></i> ModeratorApp</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="#">Overview <span class="sr-only"></span></a></li>
+                <li (click)="gotoEvents()" class="active"><a>Events</a></li>
+                <li><a href="#">Teams</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Results</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Results summary (2/3)</h1>
+
+            <div *ngIf="team" class="edit-form">
+                <input type="hidden" name="_csrf" value="Z2dFbGwwRUg1FDANLn5yZVBUdD1eV3YZUzI3XSFpMnszPTU/GEAmOQ==">
+
+                <div class="items-container correct">
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Question?</label>
+                        <input disabled value="Najbolji bug na RSC3.0?" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Points</label>
+                        <input disabled value="4" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Type</label>
+                        <select disabled class="form-control">
+                            <option selected value="1">Single answer</option>
+                            <option value="2">Multiple answer</option>
+                            <option value="3">Manual input</option>
+                            <option value="4">Multimedia</option>
+                        </select>
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Answer</label>
+                        <input disabled value="Ne inicijaliziraš array" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                <div class="items-container not-correct">
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Question?</label>
+                        <input disabled value="Firebase je zakon?" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Points</label>
+                        <input disabled value="0" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Type</label>
+                        <select disabled class="form-control">
+                            <option selected value="1">Single answer</option>
+                            <option value="2">Multiple answer</option>
+                            <option value="3">Manual input</option>
+                            <option value="4">Multimedia</option>
+                        </select>
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Answer</label>
+                        <input disabled value="Da, naravano!" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                <div class="items-container correct">
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Question?</label>
+                        <input disabled value="Umoran si?" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Points</label>
+                        <input disabled value="7" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Type</label>
+                        <select disabled class="form-control">
+                            <option selected value="1">Single answer</option>
+                            <option value="2">Multiple answer</option>
+                            <option value="3">Manual input</option>
+                            <option value="4">Multimedia</option>
+                        </select>
+
+                        <div class="help-block"></div>
+                    </div>
+                    <div class="form-group field-discount-export_id">
+                        <label class="control-label" >Answer</label>
+                        <input disabled value="Ne" class="form-control" type="text">
+
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,17 +4,17 @@ import { TeamAnswer }           from './teamanswer';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
-export class TeamService {
+export class TeamAnswerService {
     private eventsUrl = 'http://rsc-harambe.azurewebsites.net/api';  // URL to web API
     private headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
     constructor (private http: Http) {}
 
-    getTeamAnswers (): Observable<TeamAnswer[]> {
+    getTeamAnswers (id: number): Observable<TeamAnswer[]> {
         let params = new URLSearchParams();
         params.set('format', 'json');
         params.set('callback', 'JSONP_CALLBACK');
 
-        return this.http.get(this.eventsUrl+'/teamanswers', {headers: this.headers})
+        return this.http.get(this.eventsUrl+'/teamanswers/'+id, {headers: this.headers})
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -47,13 +47,13 @@ export class TeamService {
             .catch(this.handleError);
     }
 
-    update(event: TeamAnswer): any {
+    update(ta: TeamAnswer): any {
         const url = this.eventsUrl+'/teamanswers';
 
         return this.http
-            .post(url, JSON.stringify({action: 'update', 'data': [event]}), {headers: this.headers})
+            .post(url, JSON.stringify({action: 'update', 'data': [ta]}), {headers: this.headers})
             .toPromise()
-            .then(() => event)
+            .then(() => ta)
             .catch(this.handleError);
     }
 

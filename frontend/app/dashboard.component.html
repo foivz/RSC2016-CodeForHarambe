@@ -38,9 +38,9 @@
                             <i class="fa fa-hourglass-start"></i><br />
                             START
                         </a>
-                        <h4 *ngIf="team.name!=''">{{team.name}}</h4>
-                        <h4 *ngIf="team.name==''">NO NAME</h4>
-                        <span class="text-muted">{{team.userCount}} <i class="fa fa-user"></i></span>
+                        <h4 *ngIf="team.name!=''">{{team.name}} ({{team.userCount}} <i class="fa fa-user"></i>)</h4>
+                        <h4 *ngIf="team.name==''">NO NAME ({{team.userCount}} <i class="fa fa-user"></i>)</h4>
+                        <div (click)="gotoResult(team.id)" style="margin-top:15px;" class="btn btn-default">Check results</div>
                     </div>
                 </div>
             </div>

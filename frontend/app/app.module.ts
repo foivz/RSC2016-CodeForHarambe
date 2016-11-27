@@ -9,12 +9,14 @@ import {EventsComponent} from './events.component';
 import {EventCreateComponent} from './event-create.component';
 import {EventDetailComponent} from './event-detail-component';
 import {FlowComponent} from './flow.component'
+import {ResultsComponent} from './results.component'
 
 import { AppRoutingModule }     from './app-routing.module';
 import {EventService} from "./event.service";
 import {TeamService} from "./team.service";
 import {QuestionService} from "./question.service";
 import {AnswerService} from "./answer.service";
+import {TeamAnswerService} from "./teamanswer.service";
 
 @NgModule({
   imports: [
@@ -32,12 +34,14 @@ import {AnswerService} from "./answer.service";
       EventCreateComponent,
       EventDetailComponent,
       FlowComponent,
+      ResultsComponent,
   ],
   providers: [
       EventService,
       TeamService,
       QuestionService,
-      AnswerService
+      AnswerService,
+      TeamAnswerService
   ],
   bootstrap: [ AppComponent ]
 })
