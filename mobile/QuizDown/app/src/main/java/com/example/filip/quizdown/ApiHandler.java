@@ -130,32 +130,7 @@ public class ApiHandler {
         //-----------------------POST-----------------------------
 
         //insert event, sends JSON to server with POST method
-        /*public String insertEvent(String stringUrl, Events events){
-            String json = "";
 
-            try {
-                JSONObject parentObject = new JSONObject();
-                parentObject.accumulate("action", "create");
-
-
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.accumulate("name", events.getName());
-                jsonObject.accumulate("location", events.getLocation());
-                jsonObject.accumulate("date", events.getDate());
-
-                JSONArray array = new JSONArray();
-                array.put(jsonObject);
-                parentObject.accumulate("data", array);
-                json = parentObject.toString();
-
-            }catch (JSONException e){
-                Log.e(TAG, "JSONException: " + e.getMessage());
-            }
-
-            String result = sendPost(stringUrl, json);
-
-            return result;
-        }*/
 
         public String insertTeam(String stringUrl, Team team){
             String json = "";
@@ -194,6 +169,30 @@ public class ApiHandler {
                 Log.e(TAG, "ExecutionException: " + e.getMessage());
             }
             return teams.get(0).getId();
+        }
+
+        public void insertUser(String stringUrl, User user){
+            String json = "";
+
+            try {
+                JSONObject parentObject = new JSONObject();
+                parentObject.accumulate("action", "create");
+
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("name", user.getName());
+                jsonObject.accumulate("token", user.getToken());
+
+                JSONArray array = new JSONArray();
+                array.put(jsonObject);
+                parentObject.accumulate("data", array);
+                json = parentObject.toString();
+
+            }catch (JSONException e){
+                Log.e(TAG, "JSONException: " + e.getMessage());
+            }
+
+            String result = sendPost(stringUrl, json);
         }
 
         //update event, sends JSON to server with POST method
@@ -340,10 +339,13 @@ public class ApiHandler {
                 try{
                     team.setName(objects[0].get("name").toString());
                     team.setEventId(objects[0].get("eventID").toString());
-                    if(objects[0].get("Event") != null) {
-                        JSONObject j = (JSONObject) objects[0].get("Event");
-                        team.setId(j.get("id").toString());
+                    String val = objects[0].get("Event").toString();
+                    if(val.equals("null")) {
+                        team.setId(objects[0].get("id").toString());
+                        return team;
                     }
+                    JSONObject j = (JSONObject) objects[0].get("Event");
+                    team.setId(j.get("id").toString());
                 }catch (JSONException e){
                 Log.e(TAG, "JSONException: " + e.getMessage());
                 }

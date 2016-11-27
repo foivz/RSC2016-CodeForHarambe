@@ -32,6 +32,8 @@ import java.util.ArrayList;
 
 
 public class LogInActivity extends AppCompatActivity {
+    public static String ime;
+    public static String uid;
 
     private SignInButton mGoogleBtn;
     private static final int RC_SIGN_IN =1;
@@ -61,7 +63,14 @@ public class LogInActivity extends AppCompatActivity {
                         Toast.makeText(LogInActivity.this, ime, Toast.LENGTH_LONG).show();
                     }*/
 
-                    String ime =  firebaseAuth.getCurrentUser().getDisplayName();
+                    ime =  firebaseAuth.getCurrentUser().getDisplayName();
+                    uid =  firebaseAuth.getCurrentUser().getUid();
+
+                    User u = new User();
+                    u.setName(ime);
+                    u.setToken(uid);
+
+                    new ApiHandler().insertUser("http://rsc-harambe.azurewebsites.net/api/users", u);
 
                     Toast.makeText(LogInActivity.this, ime, Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LogInActivity.this, MenuActivity.class ));

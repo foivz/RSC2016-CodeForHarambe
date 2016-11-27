@@ -79,12 +79,17 @@ public class TeamActivity extends AppCompatActivity {
                     public void onClick(View vi) {
                         EditText et = (EditText)alertDialog.findViewById(R.id.etTeamName);
                         String name = et.getText().toString();
+                        if(name.length() == 0) {
+                            alertDialog.cancel();
+                            return;
+                        }
                         Team t = new Team();
                         t.setName(name);
                         t.setEventId(message);
                         String id = new ApiHandler().insertTeam("http://rsc-harambe.azurewebsites.net/api/teams", t);
-
-                        mAdapter.notifyDataSetChanged();
+                        //new ApiHandler().insertUserToTeam(idUser, id);
+                        Intent i = new Intent(getApplicationContext(), WaitResultActivity.class);
+                        startActivity(i);
                     }
                 });
 
@@ -94,6 +99,7 @@ public class TeamActivity extends AppCompatActivity {
                         alertDialog.cancel();
                     }
                 });
+
             }
         });
     }
